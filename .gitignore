@@ -17,6 +17,16 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# dot files
+*.babel
+*.eslint
+*.swp
+*.*.swp
+*.*.*.swp
+
+# test
+test
+
 # nyc test coverage
 .nyc_output
 
