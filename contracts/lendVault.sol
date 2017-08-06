@@ -41,6 +41,9 @@ contract lendVault {
         tokenFund += msg.value;
     }
 
+		function() payable {
+		}
+
     //contractInstance.borrowFunds(web3.toWei(fundsRequested), {from: web3.eth.accounts[0]}, getProperties);
     function borrowFunds(uint256 _fundsRequestedInWei) {
         // borrower storage currBorrower = borrowersInfo[msg.sender];

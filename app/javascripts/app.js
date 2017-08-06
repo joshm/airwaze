@@ -9,41 +9,35 @@ var LendVault = contract(lend_artifacts);
 window.fundVault = function() {
   let fundAmount = $("#fund-amount").val();
   LendVault.deployed().then(function(contractInstance) {
-    console.log(fundAmount, web3.eth.accounts[0]);
+    //console.log(fundAmount, web3.eth.accounts[0]);
     contractInstance.fundVault(
-      web3.toWei(fundAmount, 'ether'), {from: web3.eth.accounts[0]}).then(function(v) {
-        //getProperties();
-        LendVault.deployed().then(function(contractInstance) {
-          contractInstance.getProperties.call().then(function(v) {
-            console.log(v);
-            let val = JSON.parse('['+v.toString()+']');
-
-            $("#fund-left").html(web3.fromWei(val[1]));
-            $("#fund-lent").html(web3.fromWei(val[2]));
-            $("#fund-owed").html(web3.fromWei(val[3]));
-            $("#fund-paid").html(web3.fromWei(val[4]));
-            $("#fund-return").html(web3.fromWei(val[5]));
-          });
-        });
+      {from: web3.eth.accounts[0], value: web3.toWei(fundAmount, 'ether')}
+    ).then(function(v) {
+        getProperties();
       });
   });
 }
 
-/*
-function fundVault() {
-    let fundAmount = $("#fund-amount").val();
-    LendVault.fundVault({value: web3.toWei(fundAmount, 'ether'), from: web3.eth.accounts[0]}, getProperties);
+window.borrowFunds = function() {
+  let fundsRequested = $("#funds-requested").val();
+  LendVault.deployed().then(function(contractInstance) {
+    contractInstance.borrowFunds(
+      web3.toWei(fundsRequested), {from: web3.eth.accounts[1]}
+    ).then(function(v) {
+      getProperties();
+    });
+  });
 }
-*/
 
-function borrowFunds() {
-    let fundsRequested = $("#funds-requested").val();
-    LendVault.borrowFunds(web3.toWei(fundsRequested), {from: web3.eth.accounts[0]}, getProperties);
-}
-
-function makePayment() {
-    let paymentAmount = $("#payment-amount").val();
-    LendVault.makePayment(web3.toWei(paymentAmount), {from: web3.eth.accounts[0]}, getProperties);
+window.makePayment = function() {
+  let paymentAmount = $("#payment-amount").val();
+  LendVault.deployed().then(function(contractInstance) {
+    contractInstance.makePayment(
+      web3.toWei(paymentAmount), {from: web3.eth.accounts[1]}
+    ).then(function(v) {
+      getProperties();
+    });
+  });
 }
 
 function getProperties() {
@@ -61,9 +55,8 @@ function getProperties() {
   });
 }
 
-//$(document).ready(getProperties);
 $(document).ready(function() {
-  /*
+  /* uncomment this to enable metamask type wallets
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source like Metamask")
     // Use Mist/MetaMask's provider
@@ -76,16 +69,7 @@ $(document).ready(function() {
   //}
 
   LendVault.setProvider(web3.currentProvider);
-  LendVault.deployed().then(function(contractInstance) {
-    contractInstance.getProperties.call().then(function(v) {
-      let val = JSON.parse('['+v.toString()+']');
-      $("#fund-left").html(web3.fromWei(val[1]));
-      $("#fund-lent").html(web3.fromWei(val[2]));
-      $("#fund-owed").html(web3.fromWei(val[3]));
-      $("#fund-paid").html(web3.fromWei(val[4]));
-      $("#fund-return").html(web3.fromWei(val[5]));
-    });
-  });
+  getProperties();
 });
 
 
