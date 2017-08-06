@@ -1,5 +1,6 @@
-var Voting = artifacts.require("./Voting.sol");
+var LendVault = artifacts.require("./lendVault.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Voting, ['Rama', 'Nick', 'Jose'], {gas: 500000});
+  //deployer.deploy(LendVault, ['Rama', 'Nick', 'Jose'], {gas: 500000});
+  deployer.deploy(LendVault, {gas: 400000});
 };

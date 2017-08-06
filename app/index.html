@@ -1,39 +1,73 @@
+i<!DOCTYPE html>
 <html>
 <head>
   <title>Hello World DApp</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 </head>
-<body class="container">
-  <h1>A Simple Hello World Voting Application</h1>
-  <div id="address"></div>
+<body class="container margin-top-3">
   <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Candidate</th>
-          <th>Votes</th>
+          <th>Property</th>
+          <th>Value</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Rama</td>
-          <td id="candidate-1"></td>
+          <td>Lend Vault Total Ever Funded</td>
+          <td id="token-fund"></td>
         </tr>
         <tr>
-          <td>Nick</td>
-          <td id="candidate-2"></td>
+          <td>Fund Left</td>
+          <td id="fund-left"></td>
         </tr>
         <tr>
-          <td>Jose</td>
-          <td id="candidate-3"></td>
+          <td>Fund Lent</td>
+          <td id="fund-lent"></td>
+        </tr>
+        <tr>
+          <td>Fund Owed</td>
+          <td id="fund-owed"></td>
+        </tr>
+        <tr>
+          <td>Fund Paid</td>
+          <td id="fund-paid"></td>
+        </tr>
+        <tr>
+          <td>Fund Return</td>
+          <td id="fund-return"></td>
         </tr>
       </tbody>
     </table>
-    <div id="msg"></div>
   </div>
-  <input type="text" id="candidate" />
-  <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+  <br />
+  <div class="col-sm-10">
+      <input id="fund-amount" type="number" class="form-control" />
+  </div>
+  <button class="btn btn-primary col-sm-2" onclick="fundVault()">Fund Vault</button>
+
+  <br /><br />
+
+  <div class="col-sm-10">
+      <input id="funds-requested" type="number" class="form-control" />
+  </div>
+  <button class="btn btn-primary  col-sm-2" onclick="borrowFunds()">Borrow Funds</button>
+
+  <br /><br />
+
+  <div class="col-sm-10">
+      <input id="payment-amount" type="number" class="form-control" />
+  </div>
+  <button class="btn btn-primary  col-sm-2" onclick="makePayment()">Make Payment</button>
+
+  <br /><br />
+
+  <!-- <div class="col-sm-10">
+      <input id="fund-amount" type="number" class="form-control" />
+  </div>
+  <button class="btn btn-primary  col-sm-2" onclick="getProperties()">Get Properties</button>
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
